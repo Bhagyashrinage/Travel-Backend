@@ -5,11 +5,10 @@ import com.kavya.backend.services.productservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     @Autowired
@@ -33,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> searchProducts(@ RequestParam String keyword) {
+    public List<Product> searchProducts(@RequestParam String keyword) {
         return productService.searchProducts(keyword);
     }
 }
