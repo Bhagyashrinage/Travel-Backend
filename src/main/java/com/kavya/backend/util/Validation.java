@@ -23,12 +23,8 @@ public class Validation {
 
     public void userValidation(UserReuqest userRequest) throws Exception {
 
-        if (!StringUtils.hasText(userRequest.getFirstName())) {
-            throw new IllegalArgumentException("first name is invalid");
-        }
-
-        if (!StringUtils.hasText(userRequest.getLastName())) {
-            throw new IllegalArgumentException("last name is invalid");
+        if (!StringUtils.hasText(userRequest.getFullName())) {
+            throw new IllegalArgumentException("fullname name is invalid");
         }
 
         if (!StringUtils.hasText(userRequest.getEmail()) || !userRequest.getEmail().matches(ConstantsUtil.EMAIL_REGEX)) {
@@ -38,10 +34,6 @@ public class Validation {
             if (userEmail) {
                 throw new ExistDataException("Email already exist");
             }
-        }
-
-        if (!StringUtils.hasText(userRequest.getMobNo()) || !userRequest.getMobNo().matches(ConstantsUtil.MOBNO_REGEX)) {
-            throw new IllegalArgumentException("mobno is invalid");
         }
 
         if (CollectionUtils.isEmpty(userRequest.getRoles())) {

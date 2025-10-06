@@ -54,6 +54,7 @@ public class SecurityConfig {
                                 "/api/v1/home/**",
                                 "/api/v1/user/**",
                                 "/api/v1/auth/**",
+                                "/api/v1/flights/**",
                                 "/enotes-doc/**",          // custom Swagger UI base
                                 "/swagger-ui/**",          // fallback if not using custom path
                                 "/v3/api-docs/**",

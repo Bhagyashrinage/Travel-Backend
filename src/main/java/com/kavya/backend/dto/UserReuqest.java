@@ -11,10 +11,8 @@ import java.util.Set;
 @Builder
 public class UserReuqest {
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String email;
-    private String mobNo;
     private String password;
     private Set<RoleDto> roles;
 

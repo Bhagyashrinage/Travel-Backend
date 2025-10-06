@@ -17,10 +17,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String email;
-    private String mobNo;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
