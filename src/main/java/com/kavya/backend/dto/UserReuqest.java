@@ -14,15 +14,4 @@ public class UserReuqest {
     private String fullName;
     private String email;
     private String password;
-    private Set<RoleDto> roles;
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    @Builder
-    public static class RoleDto {
-        private Integer roleId;
-        private String roleName;
-    }
 }

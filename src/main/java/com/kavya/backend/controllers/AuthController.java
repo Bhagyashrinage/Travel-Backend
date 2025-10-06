@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired
@@ -46,5 +45,13 @@ public class AuthController {
             return CommonUtil.createErrorResponseMessage("Login Failed Bad Credentials", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return CommonUtil.createBuildResponse(loginResponce, HttpStatus.OK);
+    }
+
+    @GetMapping("/count")
+    public Map<String, Object> getUserCount() {
+        long count = authService.getTotalUsers();
+        return Map.of(
+                "totalUsers", count
+        );
     }
 }

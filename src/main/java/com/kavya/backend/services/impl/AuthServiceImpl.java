@@ -3,9 +3,7 @@ package com.kavya.backend.services.impl;
 import com.kavya.backend.dto.LoginRequest;
 import com.kavya.backend.dto.LoginResponce;
 import com.kavya.backend.dto.UserReuqest;
-import com.kavya.backend.entities.Role;
 import com.kavya.backend.entities.User;
-import com.kavya.backend.repositories.RoleRepository;
 import com.kavya.backend.repositories.UserRepository;
 import com.kavya.backend.security.CustomUserDetalis;
 import com.kavya.backend.services.AuthService;
@@ -20,9 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 @Service
@@ -34,9 +29,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private Validation validator;
@@ -55,9 +47,8 @@ public class AuthServiceImpl implements AuthService {
     public Boolean register(UserReuqest userRequest, String url) throws Exception {
         log.info("AuthServiceImpl : register() : Execution Start");
         validator.userValidation(userRequest);
-        modelMapper.typeMap(UserReuqest.class, User.class).addMappings(m -> m.skip(User::setRoles));
+        modelMapper.map(UserReuqest.class, User.class);
         User user = modelMapper.map(userRequest, User.class);
-        setRole(userRequest, user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User saveUser = userRepository.save(user);
         log.info("Message : {}","User Register success");
@@ -69,6 +60,9 @@ public class AuthServiceImpl implements AuthService {
         return false;
     }
 
+    public long getTotalUsers() {
+        return userRepository.count();
+    }
     // login logic
     @Override
     public LoginResponce login(LoginRequest loginRequest) throws Exception {
@@ -88,13 +82,5 @@ public class AuthServiceImpl implements AuthService {
             return login;
         }
         return null;
-    }
-
-    private void setRole(UserReuqest userRequest, User user) {
-        List<Integer> roleIds = userRequest.getRoles().stream()
-                .map(UserReuqest.RoleDto::getRoleId)
-                .toList();
-        Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
-        user.setRoles(roles);
     }
 }

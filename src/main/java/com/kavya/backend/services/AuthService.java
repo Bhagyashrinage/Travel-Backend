@@ -8,5 +8,6 @@ public interface AuthService {
 
     public Boolean register(UserReuqest userRequest, String url) throws Exception;
     public LoginResponce login(LoginRequest loginRequest) throws Exception;
+    public long getTotalUsers();
 
 }

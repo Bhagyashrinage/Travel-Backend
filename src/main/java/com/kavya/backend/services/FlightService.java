@@ -6,5 +6,6 @@ import com.kavya.backend.dto.FlightResponse;
 public interface FlightService {
 
     FlightResponse addFlight(FlightRequest req);
+    public long getTotalFlights();
 
 }

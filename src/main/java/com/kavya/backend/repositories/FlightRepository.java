@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
     boolean existsByFlightNumber(String flightNumber);
-
     List<Flight> findByDepartureCityIgnoreCaseAndDestinationCityIgnoreCase(String departureCity, String destinationCity);
+    long count();
 
 }

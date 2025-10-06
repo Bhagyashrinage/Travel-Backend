@@ -38,4 +38,9 @@ public class FlightServiceImpl  implements FlightService {
         // Convert Entity -> DTO for response
         return modelMapper.map(savedFlight, FlightResponse.class);
     }
+
+    @Override
+    public long getTotalFlights() {
+        return flightRepository.count();
+    }
 }

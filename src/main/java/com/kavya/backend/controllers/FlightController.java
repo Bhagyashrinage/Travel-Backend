@@ -10,8 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/flights")
@@ -55,4 +55,11 @@ public class FlightController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/count")
+    public Map<String, Object> getUserCount() {
+        long count = flightService.getTotalFlights();
+        return Map.of(
+                "totalFlights", count
+        );
+    }
 }
